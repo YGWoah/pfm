@@ -51,3 +51,15 @@ If you have any questions, feedback, or suggestions, feel free to reach out to t
 Acknowledgements
 
 We would like to acknowledge the <a href="https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=&cad=rja&uact=8&ved=2ahUKEwiBhpST3_n-AhU3T6QEHUHGAhIQFnoECAYQAQ&url=https%3A%2F%2Fwww.elephantsql.com%2F&usg=AOvVaw1HCOb7Iz5tqRbcIOUBQbgh" > ElephantSQL</a> team for providing a reliable and easy-to-use database hosting service.
+
+explaing the database and the tables
+
+```
+    The User model represents a user and has a one-to-many relationship with the Commentaire model (one user can have multiple comments) and the Article model (one user can have multiple articles).
+
+    The Article model represents an article and has a many-to-one relationship with the User model (an article belongs to a single user) and a many-to-one relationship with the Categorie model (an article belongs to a single category). It also has a one-to-many relationship with the Commentaire model (an article can have multiple comments).
+
+    The Categorie model represents a category and has a one-to-many relationship with the Article model (a category can have multiple articles).
+
+    The Commentaire model represents a comment and has a many-to-one relationship with the User model (a comment belongs to a single user) and a many-to-one relationship with the Article model (a comment belongs to a single article).
+```
