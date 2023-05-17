@@ -1,0 +1,26 @@
+# # Create a comment
+# POST http://localhost:3000/comment
+# Content-Type: application/json
+
+# {
+#   "contenu": "New comment2",
+#   "articleId": 15,
+#   "userId": 8
+# }
+
+## Get all comments of a user
+# GET http://localhost:3000/comment/user/3
+
+## Get all comments of an article
+# GET http://localhost:3000/comment/article/44
+
+## Update a comment
+# PUT http://localhost:3000/comment/1
+# Content-Type: application/json
+
+# {
+#   "contenu": "Updated comment"
+# }
+
+### Delete a comment
+DELETE http://localhost:3000/comment/1

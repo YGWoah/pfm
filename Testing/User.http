@@ -1,0 +1,29 @@
+//test Post users/ 
+
+# this request is for creating new users
+
+POST http://localhost:3000/users/ HTTP/1.1
+content-type: application/json
+
+{
+    "name": "Test King",
+    "email": "test7@exemple.com",
+    "password": "123456sdkmdsm"
+}
+
+
+# //this request is for updating email
+# PATCH http://localhost:3000/users/3/email HTTP/1.1
+# content-type: application/json
+
+# {
+    
+#     "email": "exempleUpdate@gmail.com"
+# }
+
+# DELETE http://localhost:3000/users/2 HTTP/1.1
+# Content-Type: application/json
+
+# {
+#     "password": "123456sdkmdsm "
+# }

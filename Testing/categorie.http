@@ -1,0 +1,24 @@
+# ### Get all categories
+# GET http://localhost:3000/categorie
+
+# ### Get a specific category by ID
+# GET http://localhost:3000/categories/{id}
+
+### Create a new category
+# POST http://localhost:3000/categorie
+# Content-Type: application/json
+
+# {
+#   "name": "New Category2"
+# }
+
+### Update an existing category
+# PATCH http://localhost:3000/categorie/2
+# Content-Type: application/json
+
+# {
+#   "name": "Updated Category"
+# }
+
+### Delete a category by ID
+DELETE http://localhost:3000/categorie/4

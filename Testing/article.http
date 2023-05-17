@@ -1,0 +1,15 @@
+# create article
+# POST http://localhost:3000/article/
+# Content-Type: application/json
+
+# {
+#     "titre": "Article 2",
+#     "contenu": "Content 2",
+#     "categorieId": 1,
+#     "userId": 1
+# }
+
+
+# GET http://localhost:3000/article
+
+
