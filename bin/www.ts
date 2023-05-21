@@ -6,12 +6,12 @@ import 'module-alias/register';
 import { config } from 'dotenv';
 config();
 
-import app from '@/app';
+import app from '../src/app';
 import Debug from 'debug';
 import http from 'http';
 
 const debug = Debug('pfmts:server');
-import { bootstrapLogger } from '../src/utils/loggers.js';
+import { bootstrapLogger } from '../src/utils/loggers';
 bootstrapLogger();
 
 /**
