@@ -9,6 +9,7 @@ import cookieParser from 'cookie-parser';
 import logger from 'morgan';
 
 import indexRouter from './routes/index';
+import authRouter from './routes/auth';
 import usersRouter from './routes/users';
 import categorieRouter from './routes/categorie';
 import articleRouter from './routes/article';
@@ -29,11 +30,11 @@ class App {
     this.app.use(express.json());
     this.app.use(express.urlencoded({ extended: false }));
     this.app.use(cookieParser());
-    this.app.use(express.static(path.join(__dirname, 'public')));
   }
 
   private routerSetup() {
     this.app.use('/', indexRouter);
+    this.app.use('/auth', authRouter);
     this.app.use('/users', usersRouter);
     this.app.use('/categorie', categorieRouter);
     this.app.use('/article', articleRouter);
