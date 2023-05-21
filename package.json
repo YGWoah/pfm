@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "start": "export NODE_OPTIONS='--trace-deprecation --abort-on-uncaught-exception' && export NODE_ENV=development && nodemon --exec ts-node ./bin/www.ts",
-    "build": "prisma generate && prisma migrate deploy && sh etc/build.sh"
+    "build": "sh etc/build.sh",
+    "vercel-build": "prisma generate && prisma migrate deploy && sh etc/build.sh"
   },
   "dependencies": {
     "@prisma/client": "^4.14.0",
