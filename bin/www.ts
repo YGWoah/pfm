@@ -11,7 +11,7 @@ import Debug from 'debug';
 import http from 'http';
 
 const debug = Debug('pfmts:server');
-import { bootstrapLogger } from '@/utils/loggers';
+import { bootstrapLogger } from '../src/utils/loggers.js';
 bootstrapLogger();
 
 /**
