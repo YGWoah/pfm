@@ -1,15 +1,18 @@
-# ### Get all categories
-# GET http://localhost:3000/categorie
+### Get all categories
+GET http://localhost:8080/categorie
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiZW1haWwiOiJ0ZXN0N0BleGVtcGxlLmNvbSIsImlhdCI6MTY4NDgzODE3NSwiZXhwIjoxNjg0OTI0NTc1fQ.q8F9Wby4IKQdeRLJazIcF8mximh9T4m-EhbDDynieqU
+
 
 # ### Get a specific category by ID
 # GET http://localhost:3000/categories/{id}
 
-### Create a new category
+## Create a new category
 # POST http://localhost:3000/categorie
 # Content-Type: application/json
+# Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiZW1haWwiOiJ0ZXN0N0BleGVtcGxlLmNvbSIsImlhdCI6MTY4NDgzODE3NSwiZXhwIjoxNjg0OTI0NTc1fQ.q8F9Wby4IKQdeRLJazIcF8mximh9T4m-EhbDDynieqU
 
 # {
-#   "name": "New Category2"
+#   "name": "Sport"
 # }
 
 ### Update an existing category
@@ -20,5 +23,6 @@
 #   "name": "Updated Category"
 # }
 
-### Delete a category by ID
-DELETE http://localhost:3000/categorie/4
+## Delete a category by ID
+# DELETE http://localhost:3000/categorie/1
+# Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiZW1haWwiOiJ0ZXN0N0BleGVtcGxlLmNvbSIsImlhdCI6MTY4NDgzODE3NSwiZXhwIjoxNjg0OTI0NTc1fQ.q8F9Wby4IKQdeRLJazIcF8mximh9T4m-EhbDDynieqU

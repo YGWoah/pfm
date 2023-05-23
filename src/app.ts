@@ -14,6 +14,7 @@ import usersRouter from './routes/users';
 import categorieRouter from './routes/categorie';
 import articleRouter from './routes/article';
 import commentRouter from './routes/comment';
+import { authenticate } from './middleware/authenticate';
 
 class App {
   public app: express.Application;
@@ -33,8 +34,9 @@ class App {
   }
 
   private routerSetup() {
-    this.app.use('/', indexRouter);
     this.app.use('/auth', authRouter);
+    this.app.use(authenticate);
+    this.app.use('/', indexRouter);
     this.app.use('/users', usersRouter);
     this.app.use('/categorie', categorieRouter);
     this.app.use('/article', articleRouter);
