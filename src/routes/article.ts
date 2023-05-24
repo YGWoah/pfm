@@ -28,16 +28,24 @@ router.get('/:id', (req: Request, res: Response) => {
 
 //create a new article
 router.post('/', async (req, res) => {
-  let { titre, contenu, categorieId, userId } = req.body; //userId is should be gotten from the token jwt
+  let { titre, contenu, categorie, userId, image, published } =
+    req.body; //userId is should be gotten from the token jwt
+  if (!titre || !contenu || !categorie || !userId || !image)
+    return res.status(400).json({
+      succes: false,
+      message: 'Data inusifisant',
+    });
+
   //sould i check if the category exists?
   prisma.article
     .create({
       data: {
         titre: titre,
         contenu: contenu,
-        Categorie: { connect: { id: categorieId } },
+        Categorie: { connect: { id: categorie } },
         User: { connect: { id: userId } },
-        published: false,
+        ...(image ? { image: image } : {}),
+        ...(published ? { published: published } : {}),
       },
     })
     .then((article: Article) => {
