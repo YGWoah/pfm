@@ -29,7 +29,6 @@ $font: 'Montserrat' sans-serif;
     margin-left: 0.5rem;
   }
 
-  input,
   a {
     font-size: 1rem;
     width: 8.33rem;
@@ -41,13 +40,10 @@ $font: 'Montserrat' sans-serif;
     font-weight: 400;
   }
   .login {
-    color: #1e53cf;
     background: transparent;
     border: none;
   }
   .signIn {
-    color: white;
-    background: #1e53cf;
     border-radius: 6px;
     border: none;
   }
@@ -79,12 +75,9 @@ $font: 'Montserrat' sans-serif;
       }
 
       .below-title {
-        font-family: 'Montserrat';
-        font-style: normal;
         font-weight: 400;
         font-size: 18px;
         line-height: 28px;
-        color: #c0c0c0;
       }
 
       .title-btns {
@@ -102,13 +95,9 @@ $font: 'Montserrat' sans-serif;
             border: none;
           }
           .getStarted {
-            justify-content: center;
             width: 10.33rem;
             background-color: #1e53cf;
             border-radius: 10px;
-            input {
-              color: white;
-            }
           }
 
           .watchVideo {

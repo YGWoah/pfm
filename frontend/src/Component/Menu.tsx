@@ -5,79 +5,80 @@ const Nav = () => {
     <section className="flex h-full w-full">
       <div className="sticky flex flex-col items-center basis-80 h-full overflow-hidden text-black  border-r border-gray-700 ">
         <a className="flex items-center w-full px-3 mt-3" href="#">
-          <span className="ml-2 text-sm font-bold">The App</span>
+          <span className="ml-2 text-2xl font-bold">The Booy</span>
         </a>
         <div className="w-full px-2">
           <div className="flex flex-col items-center w-full mt-3 border-t border-gray-700">
             <NavLink
-              to="/article"
+              to="/home/article"
               className={({ isActive, isPending }) =>
-                `flex items-center w-full h-12 px-3 mt-2 rounded ${
+                `flex items-center w-full h-12 px-3 mt-4 rounded text ${
                   isActive
-                    ? 'hover:bg-gray-700 hover:text-gray-300'
+                    ? ' text-blue-700'
                     : isPending
-                    ? 'bg-gray-700 text-gray-300'
+                    ? 'bg-blue-700 text-white'
                     : ''
                 }`
               }
             >
-              <span className="ml-2 text-sm font-medium">
+              <span className="ml-2 text-lg font-semibold">
                 Articles
               </span>
             </NavLink>
 
             <NavLink
-              // className="flex items-center w-full h-12 px-3 mt-2 rounded hover:bg-gray-700 hover:text-gray-300"
               className={({ isActive, isPending }) =>
-                `flex items-center w-full h-12 px-3 mt-2 rounded ${
+                `flex items-center w-full h-12 px-3 mt-4 rounded text ${
                   isActive
-                    ? 'hover:bg-gray-700 hover:text-gray-300'
+                    ? ' text-blue-700'
                     : isPending
-                    ? 'bg-gray-700 text-gray-300'
+                    ? 'bg-blue-700 text-white'
                     : ''
                 }`
               }
-              to="/article/create"
+              to="/home/create"
             >
-              <span className="ml-2 text-sm font-medium">
+              <span className="ml-2 text-lg font-semibold">
                 Create new Article
               </span>
             </NavLink>
 
             <NavLink
               className={({ isActive, isPending }) =>
-                `flex items-center w-full h-12 px-3 mt-2 rounded ${
+                `flex items-center w-full h-12 px-3 mt-4 rounded text ${
                   isActive
-                    ? 'hover:bg-gray-700 hover:text-gray-300'
+                    ? ' text-blue-700'
                     : isPending
-                    ? 'bg-gray-700 text-gray-300'
+                    ? 'bg-blue-700 text-white'
                     : ''
                 }`
               }
-              to="/profile"
+              to="/home/profile"
             >
-              <span className="ml-2 text-sm font-medium">
+              <span className="ml-2 text-lg font-semibold">
                 Profile
               </span>
             </NavLink>
           </div>
           <div className="flex flex-col items-center w-full mt-2 border-t border-gray-700">
             <a
-              className="flex items-center w-full h-12 px-3 mt-2 rounded hover:bg-gray-700 hover:text-gray-300"
+              className="flex items-center w-full h-12 px-3 mt-4 rounded hover:bg-gray-700 hover:text-gray-300"
               href="#"
             >
-              <span className="ml-2 text-sm font-medium">
+              <span className="ml-2 text-lg font-semibold">
                 Settings
               </span>
             </a>
           </div>
         </div>
 
-        <button className="flex items-center justify-center w-full h-16 mt-auto   hover:bg-gray-700 hover:text-gray-300">
-          <span className="ml-2 text-sm font-medium">Log Out</span>
+        <button className="flex items-center justify-center w-full h-16 mt-auto   ">
+          <span className="  text-lg font-semibold hover:text-red-700">
+            Log Out
+          </span>
         </button>
       </div>
-      <div className="grow scroll-smooth overflow-y-scroll ">
+      <div className="w-10/12 scroll-smooth overflow-y-scroll ">
         <Outlet />
       </div>
     </section>

@@ -1,41 +1,3 @@
-// import axios from 'axios';
-import { Link, useLoaderData } from 'react-router-dom';
-import '../style/Article.scss';
-
-const Reply = (props: {
-  userName: string;
-  role: string;
-  replyImage: string;
-  content: string;
-}) => {
-  const profileImg = 'https://picsum.photos/200/300';
-  const replyImage = 'https://picsum.photos/300/300';
-
-  return (
-    <div className="post">
-      <div>
-        <div>
-          <Link to={`/profile/${props.userName}`}>
-            <div>
-              <img src={profileImg} alt="" />
-            </div>
-            <div>
-              <h5>{props.userName}</h5>
-              <p>{props.role}</p>
-            </div>
-          </Link>
-        </div>
-      </div>
-      <div>
-        <p>{props.content}</p>
-      </div>
-      <div>
-        <img src={replyImage} alt="" />
-      </div>
-    </div>
-  );
-};
-
 interface ArticleType {
   categorieId: number;
   contenu: string;
@@ -48,7 +10,11 @@ interface ArticleType {
   userId: number;
 }
 
-function Article({ article }: { article: ArticleType }) {
+export default function Article({
+  article,
+}: {
+  article: ArticleType;
+}) {
   return (
     <div className="m-5">
       <p className="ax-w-lg text-xl leading-normal text-gray-900">
@@ -105,23 +71,3 @@ function Article({ article }: { article: ArticleType }) {
     </div>
   );
 }
-
-const PostRouter = (props: any) => {
-  const atricles: ArticleType[] | unknown =
-    useLoaderData() as ArticleType[];
-
-  console.log('props', atricles);
-  if (!Array.isArray(atricles)) {
-    return <div>Something went Wrong</div>;
-  } else
-    return (
-      <div className="flex flex-col p-9 overflow">
-        {atricles &&
-          atricles.map((article: ArticleType) => {
-            return <Article article={article} />;
-          })}
-      </div>
-    );
-};
-
-export default PostRouter;

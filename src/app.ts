@@ -7,6 +7,7 @@ import express, {
 import path from 'path';
 import cookieParser from 'cookie-parser';
 import logger from 'morgan';
+import { PrismaClient } from '@prisma/client';
 
 import indexRouter from './routes/index';
 import authRouter from './routes/auth';
@@ -24,6 +25,7 @@ class App {
     this.config();
     this.routerSetup();
     this.errorHandler();
+    this.checkDatabaseConnection();
   }
 
   private config() {
@@ -43,6 +45,19 @@ class App {
     this.app.use('/comment', commentRouter);
   }
 
+  private checkDatabaseConnection() {
+    const prisma = new PrismaClient();
+    prisma
+      .$connect()
+      .then(() => {
+        console.log('Database connection is set');
+      })
+      .catch(() => {
+        console.log('...');
+      });
+
+    console.log('Checking database connection...');
+  }
   private errorHandler() {
     // Error handling middleware function
     this.app.use(

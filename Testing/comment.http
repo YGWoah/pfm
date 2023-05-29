@@ -11,8 +11,8 @@
 ## Get all comments of a user
 # GET http://localhost:3000/comment/user/3
 
-## Get all comments of an article
-# GET http://localhost:3000/comment/article/44
+# Get all comments of an article
+GET http://localhost:3000/comment/article/4
 
 ## Update a comment
 # PUT http://localhost:3000/comment/1
@@ -22,5 +22,5 @@
 #   "contenu": "Updated comment"
 # }
 
-### Delete a comment
-DELETE http://localhost:3000/comment/1
+# ### Delete a comment
+# DELETE http://localhost:3000/comment/1

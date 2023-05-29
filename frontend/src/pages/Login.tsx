@@ -130,7 +130,7 @@ const Login = () => {
       </>
     );
   } else {
-    return <Navigate to="/" />;
+    return <Navigate to="/home" />;
   }
 };
 

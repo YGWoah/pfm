@@ -28,8 +28,21 @@ router.get('/:id', (req: Request, res: Response) => {
 
 //create a new article
 router.post('/', async (req, res) => {
-  let { titre, contenu, categorie, userId, image, published } =
-    req.body; //userId is should be gotten from the token jwt
+  let {
+    titre,
+    contenu,
+    categorie,
+    userId,
+    image,
+    published,
+  }: {
+    titre: string;
+    contenu: string;
+    categorie: number;
+    userId: number;
+    image: string;
+    published: boolean;
+  } = req.body; //userId is should be gotten from the token jwt
   if (!titre || !contenu || !categorie || !userId || !image)
     return res.status(400).json({
       succes: false,
@@ -37,6 +50,13 @@ router.post('/', async (req, res) => {
     });
 
   //sould i check if the category exists?
+  if (image.length > 249 || contenu.length > 1199) {
+    return res.status(413).json({
+      succes: false,
+      message: 'Content Too Large',
+    });
+  }
+
   prisma.article
     .create({
       data: {

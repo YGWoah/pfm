@@ -9,9 +9,9 @@ datasource db {
 
 model Article {
   id          Int           @id @default(autoincrement())
-  titre       String        @default("") @db.VarChar(40)
-  contenu     String        @default("") @db.VarChar(40)
-  image       String?       @default("") @db.VarChar(40)
+  titre       String        @default("") @db.VarChar(100)
+  contenu     String        @default("") @db.VarChar(1200)
+  image       String?       @default("") @db.VarChar(250)
   createdAt   DateTime      @default(now())
   updatedAt   DateTime?     @updatedAt
   published   Boolean       @default(false)
@@ -31,7 +31,7 @@ model Categorie {
 model Commentaire {
   id        Int     @id @default(autoincrement())
   email     String  @db.VarChar(40)
-  contenu   String  @db.VarChar(40)
+  contenu   String  @db.VarChar(500)
   articleId Int
   Article   Article @relation(fields: [articleId], references: [id])
   User      User    @relation(fields: [email], references: [email])

@@ -16,6 +16,8 @@ export function authenticate(
 
       try {
         const decoded = jwt.verify(cleanedToken, secret);
+        console.log(decoded);
+
         if (decoded) {
           return next();
         }

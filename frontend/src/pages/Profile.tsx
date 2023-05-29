@@ -1,6 +1,28 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import axiosInstance from '../utils/axiosConfig';
 
 const Profile = () => {
+  const isLoggedIn = async () => {
+    let token = localStorage.getItem('token');
+    console.log(token);
+    await axiosInstance
+      .get('/auth/isLoggedIn')
+      .then((res) => {
+        if (res.data.status === 'success') {
+          return true;
+        }
+        return false;
+      })
+      .catch((err) => {
+        console.log(err);
+        return false;
+      });
+  };
+
+  useEffect(() => {
+    isLoggedIn();
+  }, []);
+
   return (
     <>
       <div className=" font-sans h-screen w-full flex flex-row justify-center items-center">
