@@ -1,4 +1,4 @@
-import { Fragment, LegacyRef, useRef } from 'react';
+import { useState, LegacyRef, useRef, useEffect } from 'react';
 import { useLoaderData } from 'react-router-dom';
 import axiosInstance from '../utils/axiosConfig';
 
@@ -14,7 +14,19 @@ interface ArticleType {
   userId: number;
 }
 
-function OneReply() {
+interface ReplyType {
+  email: string;
+  contenu: string;
+  articleId: number;
+
+  User: {
+    id: number;
+    nom: string;
+    role: string;
+  };
+}
+
+function OneReply(props: { data: ReplyType } | undefined) {
   return (
     <article className="p-6 mb-6 text-base bg-white rounded-lg  ">
       <footer className="flex justify-between items-center mb-2">
@@ -25,7 +37,7 @@ function OneReply() {
               src="https://flowbite.com/docs/images/people/profile-picture-2.jpg"
               alt="Michael Gough"
             />
-            Michael Gough
+            {props?.data.User.nom}
           </p>
           <p className="text-sm text-gray-600  ">
             <time dateTime="2022-02-08" title="February 8th, 2022">
@@ -34,40 +46,61 @@ function OneReply() {
           </p>
         </div>
       </footer>
-      <p className="text-gray-500   ">
-        Very straight-to-point article. Really worth time reading.
-        Thank you! But tools are just the instruments for the UX
-        designers. The knowledge of the design tools are as important
-        as the creation of the design strategy.Very straight-to-point
-        article. Really worth time reading. Thank you! But tools are
-        just the instruments for the UX designers. The knowledge of
-        the design tools are as important as the creation of the
-        design strategy.Very straight-to-point article. Really worth
-        time reading. Thank you! But tools are just the instruments
-        for the UX designers. The knowledge of the design tools are as
-        important as the creation of the design strategy.Very
-        straight-to-point article. Really worth time reading. Thank
-        you! But tools are just the instruments for the UX designers.
-        The knowledge of the design tools are as important as the
-        creation of the design strategy.
-      </p>
+      <p className="text-gray-500">{props?.data.contenu}</p>
     </article>
   );
 }
 
 function Reply(props: { articleId: number }) {
+  const [clickable, setClickable] = useState(true);
+  const [comments, setComments] = useState<ReplyType[]>([]);
   const contenu: LegacyRef<HTMLTextAreaElement> = useRef(null);
   const handleSubmit = () => {
+    console.log('submit');
+
+    console.log(contenu.current);
+
     try {
-      if (contenu.current?.value === undefined || !props.articleId)
+      if (props.articleId === undefined) {
+        console.log('the article id is undefined');
         return;
+      }
+      if (contenu.current?.value === undefined || !props.articleId) {
+        console.log('the content is empty');
+
+        return;
+      }
+
+      setClickable(false);
       let data = {
         contenu: contenu.current?.value,
         articleId: props.articleId,
       };
-      axiosInstance.post('comment/', data).then((res) => {});
-    } catch (error) {}
+      axiosInstance.post('/comment/', data).then((res) => {
+        setClickable(true);
+      });
+    } catch (error) {
+      console.log(error);
+      setClickable(true);
+    }
   };
+
+  const getComments = () => {
+    try {
+      axiosInstance
+        .get(`/comment/article/${props.articleId}`)
+        .then((res) => {
+          setComments(res.data);
+          console.log(res.data);
+        });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    getComments();
+  }, []);
 
   return (
     <section className="bg-white  py-8  ">
@@ -77,7 +110,7 @@ function Reply(props: { articleId: number }) {
             Discussion (20)
           </h2>
         </div>
-        <form className="mb-6 w-full">
+        <div className="mb-6 w-full">
           <div className="py-2 px-4 mb-4 bg-white rounded-lg rounded-t-lg border border-gray-200 ">
             <label htmlFor="comment" className="sr-only">
               Your comment
@@ -88,20 +121,26 @@ function Reply(props: { articleId: number }) {
               className="px-0 w-full text-base text-gray-900 border-0 focus:ring-0 focus:outline-none  "
               placeholder="Write a comment..."
               required
+              ref={contenu}
               maxLength={1000}
             ></textarea>
           </div>
           <button
             onClick={(e) => {
-              // handleSubmit(e, false);
+              handleSubmit();
             }}
-            className="inline-flex justify-center m-2 py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-primary hover:bg-gray-700 focus:ring-gray-500 focus:border-gray-500 "
+            className={
+              'inline-flex justify-center m-2 py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-primary hover:bg-gray-700 focus:ring-gray-500 focus:border-gray-500 ' +
+              (clickable ? 'cursor-pointer' : 'cursor-not-allowed')
+            }
           >
             Post Comment
           </button>
-        </form>
+        </div>
       </div>
-      <OneReply />
+      {comments.map((comment: any) => (
+        <OneReply data={comment} />
+      ))}
     </section>
   );
 }
@@ -115,7 +154,6 @@ export default function Article() {
     <div className="   ">
       <div className="m-5  ">
         <p className="ax-w-lg text-xl leading-normal text-gray-900">
-          {' '}
           <span className="font-semibold">Johe Piden</span> shared
           this article {article?.userId}
         </p>

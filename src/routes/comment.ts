@@ -6,12 +6,20 @@ const router = express.Router();
 
 // create a comment
 router.post('/', async (req, res) => {
-  let { contenu, articleId, userId } = req.body; //userId is should be gotten from the token jwt
+  let { contenu, articleId } = req.body;
+  let userId = req.user?.id;
   let existingArticle = await prisma.article.findUnique({
     where: {
       id: parseInt(articleId),
     },
   });
+  console.log(req.user);
+
+  if (!userId) {
+    res.status(401).json({ error: 'Unauthorized' });
+    return;
+  }
+
   if (!existingArticle) {
     res.status(404).json({ error: 'Article not found' });
     return;
@@ -90,6 +98,15 @@ router.get(
         where: {
           Article: {
             id: parseInt(articleID),
+          },
+        },
+        include: {
+          User: {
+            select: {
+              id: true,
+              role: true,
+              nom: true,
+            },
           },
         },
       })
