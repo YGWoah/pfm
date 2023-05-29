@@ -20,64 +20,60 @@ Follow these steps to run the project locally:
 
 1. Clone the repository:
 
-git clone https://github.com/YGWoah/pfm.git
+   git clone https://github.com/YGWoah/pfm.git
 
 2. Navigate to the project directory:
 
-cd pfm
+   cd pfm
 
 3. Install dependencies for the API server:
 
-npm install
+   npm install
 
 4. Create a `.env` file in the project's root directory and add the following environment variables:
 
-DATABASE_URL=your_database_url ("postgres://vagxglnu:gmSDBJPFYMkhlB2hkHmpeUlORT_omYiC@drona.db.elephantsql.com/vagxglnu")
-JWT_SECRET=your_secret_key
+   DATABASE_URL=your_database_url ("postgres://vagxglnu:gmSDBJPFYMkhlB2hkHmpeUlORT_omYiC@drona.db.elephantsql.com/vagxglnu")
+   JWT_SECRET=your_secret_key
 
 5. Generate Prisma client:
 
-npx prisma generate
+   npx prisma generate
 
 6. Pull the latest database changes:
 
-npm run db pull
+   npm run db pull
 
 7. Start the API server:
 
-npm run dev
-
-sql
+   npm run dev
 
 8. Open a new terminal window/tab.
 
 9. Navigate to the frontend directory:
 
-cd frontend
-
-typescript
+   cd frontend
 
 10. Install dependencies for the frontend:
 
 ```
-npm install
+    npm install
 ```
 
 11. Start the frontend server:
 
 ```
-npm start
+    npm start
 ```
 
 ## Usage
 
 Provide examples and instructions on how to use your project. This section can include code snippets, screenshots, or demo links.
 
+<!--
 ## Contributing
 
 Specify guidelines for contributing to your project. Include information on how others can report issues, submit pull requests, or contact you.
-
-## License
+-->
 
 ## License
 
@@ -95,6 +91,8 @@ Please feel free to reach out with any questions or feedback regarding the proje
 
 The blog app is a platform where users can create and share articles on various topics. It also allows users to engage with the content by commenting on articles posted by others.
 
+<!--
+
 ### Features
 
 - Feature 1: [Description of feature 1]
@@ -105,6 +103,7 @@ The blog app is a platform where users can create and share articles on various 
 
 - Admin: [Description of admin role]
 - User: [Description of user role]
+  -->
 
 ### Technologies Used
 
