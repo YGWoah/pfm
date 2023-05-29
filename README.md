@@ -16,7 +16,60 @@ Provide a brief overview of your project, highlighting its purpose and key featu
 
 ## Installation
 
-Instructions on how to install and set up your project locally. Include any dependencies or prerequisites required.
+Follow these steps to run the project locally:
+
+1. Clone the repository:
+
+git clone https://github.com/YGWoah/pfm.git
+
+2. Navigate to the project directory:
+
+cd pfm
+
+3. Install dependencies for the API server:
+
+npm install
+
+4. Create a `.env` file in the project's root directory and add the following environment variables:
+
+DATABASE_URL=your_database_url ("postgres://vagxglnu:gmSDBJPFYMkhlB2hkHmpeUlORT_omYiC@drona.db.elephantsql.com/vagxglnu")
+JWT_SECRET=your_secret_key
+
+5. Generate Prisma client:
+
+npx prisma generate
+
+6. Pull the latest database changes:
+
+npm run db pull
+
+7. Start the API server:
+
+npm run dev
+
+sql
+
+8. Open a new terminal window/tab.
+
+9. Navigate to the frontend directory:
+
+cd frontend
+
+typescript
+
+10. Install dependencies for the frontend:
+
+```
+npm install
+```
+
+11. Start the frontend server:
+
+```
+npm start
+```
+
+Make sure to replace `your-username` and `your-project` with your actual GitHub username and project name.
 
 ## Usage
 
