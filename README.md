@@ -69,8 +69,6 @@ npm install
 npm start
 ```
 
-Make sure to replace `your-username` and `your-project` with your actual GitHub username and project name.
-
 ## Usage
 
 Provide examples and instructions on how to use your project. This section can include code snippets, screenshots, or demo links.
@@ -81,18 +79,21 @@ Specify guidelines for contributing to your project. Include information on how 
 
 ## License
 
-Specify the license under which your project is distributed. You can include a link to the license file if applicable.
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ## Contact
 
 Please feel free to reach out with any questions or feedback regarding the project.
 
-- Name: [Your Name]
-- Email: [Your Email]
+- Name: Hamza El Massoudi
+- GitHub: @YGWoah
+- Email: hamza.elmassoudi.dev@gmail.com
 
 ## About the App
 
-Provide a general idea of the blog app and how it works. Include information about its main features, user roles, and any specific technologies or frameworks used.
+The blog app is a platform where users can create and share articles on various topics. It also allows users to engage with the content by commenting on articles posted by others.
 
 ### Features
 
@@ -107,6 +108,8 @@ Provide a general idea of the blog app and how it works. Include information abo
 
 ### Technologies Used
 
-- Front-end: [List of front-end technologies used]
-- Back-end: [List of back-end technologies used]
-- Database: [Database technology used]
+    Front-end: The front-end of the blog app was developed using React, JavaScript, and HTML/CSS. I utilized the Tailwind CSS framework for styling . The front-end will be hosted on Netlify.
+
+    Back-end: For the back-end, I used Node.js as the runtime environment and Express.js as the web framework. These technologies allowed me to handle routing, middleware, and API development efficiently. The back-end will is hosted on vercel.
+
+    Database: I utilized PostgreSQL as the database management system to store and manage data for the blog app. PostgreSQL provided the necessary data persistence and allowed for efficient querying and data manipulation. The database is hosted on ElephantSQL.
