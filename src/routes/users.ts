@@ -1,6 +1,6 @@
 import express, { Request, Response, NextFunction } from 'express';
 import { PrismaClient, User } from '@prisma/client';
-
+import { hashPassword } from '../utils/passwordUtils';
 const prisma = new PrismaClient();
 const router = express.Router();
 
@@ -26,7 +26,7 @@ router.get('/:id', (req: Request, res: Response) => {
     });
 });
 
-router.post('/', (req: Request, res: Response) => {
+router.post('/', async (req: Request, res: Response) => {
   let { name, email, password } = req.body;
 
   const emailRegex =
@@ -43,12 +43,13 @@ router.post('/', (req: Request, res: Response) => {
     res.json({ error: 'Name is too short' });
     return;
   }
+  let hashedPassword = await hashPassword(password);
   prisma.user
     .create({
       data: {
         nom: name, // i need to check if the name is unique
         email: email, // i need to check if the email is unique
-        password: password, //i need to hash the password
+        password: hashedPassword, //i need to hash the password
       },
     })
     .then((user: User | null) => {

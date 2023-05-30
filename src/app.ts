@@ -52,7 +52,10 @@ class App {
       .then(() => {
         console.log('Database connection is set');
       })
-      .catch(() => {
+      .catch((err) => {
+        console.log('Database connection failed');
+        console.log(err);
+
         console.log('...');
       });
 

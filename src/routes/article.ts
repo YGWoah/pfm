@@ -1,13 +1,34 @@
 import express, { Request, Response, NextFunction } from 'express';
 import { PrismaClient, Article } from '@prisma/client';
+import { takeCoverage } from 'v8';
 
 const prisma = new PrismaClient();
 const router = express.Router();
 
 router.get('/', (req: Request, res: Response, next: NextFunction) => {
-  prisma.article.findMany().then((article: Article[] | null) => {
-    res.json(article);
-  });
+  let { take, skip } = req.query;
+  prisma.article
+    .findMany({
+      take: take ? parseInt(take as string) : undefined,
+      skip: skip ? parseInt(skip as string) : undefined,
+      orderBy: {
+        createdAt: 'desc',
+      },
+
+      include: {
+        Categorie: true,
+        User: {
+          select: {
+            id: true,
+            nom: true,
+            email: true,
+          },
+        },
+      },
+    })
+    .then((article: Article[] | null) => {
+      res.json(article);
+    });
 });
 
 router.get('/:id', (req: Request, res: Response) => {
