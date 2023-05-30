@@ -46,7 +46,7 @@ function OneReply(props: { data: ReplyType } | undefined) {
           </p>
         </div>
       </footer>
-      <p className="text-gray-500">{props?.data.contenu}</p>
+      <p className="text-gray-500 text-base">{props?.data.contenu}</p>
     </article>
   );
 }

@@ -69,46 +69,19 @@ $font: 'Montserrat' sans-serif;
         font-style: normal;
         font-size: 2.441rem;
         line-height: 63px;
-        span {
-          color: $first_color;
-        }
       }
 
-      .below-title {
+      input,
+      a {
+        font-size: 1rem;
+        height: 3rem;
+        outline: none;
+        cursor: pointer;
+        font-family: 'Montserrat' sans-serif;
+        font-style: normal;
         font-weight: 400;
-        font-size: 18px;
-        line-height: 28px;
-      }
-
-      .title-btns {
-        .sub-title-btns {
-          input,
-          a {
-            font-size: 1rem;
-            height: 3rem;
-            outline: none;
-            cursor: pointer;
-            font-family: 'Montserrat' sans-serif;
-            font-style: normal;
-            font-weight: 400;
-            background: transparent;
-            border: none;
-          }
-          .getStarted {
-            width: 10.33rem;
-            background-color: #1e53cf;
-            border-radius: 10px;
-          }
-
-          .watchVideo {
-            width: 10.33rem;
-            justify-content: baseline;
-            img {
-              width: 2rem;
-              margin-right: 4px;
-            }
-          }
-        }
+        background: transparent;
+        border: none;
       }
     }
   }

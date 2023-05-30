@@ -23,7 +23,7 @@ function Hero() {
             </Link>
             <Link
               to="signup"
-              className="flex signIn items-center justify-center bg-primary text-white"
+              className="flex signIn items-center justify-center bg-primary text-white rounded-md text-base w-32 h-9"
             >
               Sign up
             </Link>
@@ -36,15 +36,15 @@ function Hero() {
             <div className="title  ">
               <p>Unleash Your Thoughts, Ignite the World </p>
             </div>
-            <div className="below-title m-5">
+            <div className="  font-normal text-lg leading-7 m-5">
               <p className="text-secondary">
                 Join the Community of Curious Minds, Where Ideas Come
                 to Life
               </p>
             </div>
-            <div className="title-btns flex w-full justify-center m-10 ">
-              <div className="sub-title-btns flex justify-between basis-3/6 ">
-                <div className="getStarted flex items-center  justify-center">
+            <div className=" flex w-full justify-center m-10 ">
+              <div className=" flex justify-between basis-3/6 ">
+                <div className=" w-40 bg-primary rounded-lg flex items-center  justify-center ">
                   <NavLink
                     to="/home"
                     // className={({isActive,isPending})=>`flex items-center` ${isPending?'
@@ -62,17 +62,17 @@ function Hero() {
                     Get Started
                   </NavLink>
                 </div>
-                <div className="watchVideo flex">
-                  {/* <img src={playIcon} alt="" /> */}
+                <div className="w-40   flex cursor-not-allowed ">
                   <a
                     href="https://www.youtube.com/watch?v=jYr0QSJ5Yts&t=995s"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center"
+                    className="flex items-center cursor-not-allowed "
                   >
-                    Watch Video
+                    <span className="cursor-not-allowed hover:opacity-50">
+                      Watch Video
+                    </span>
                   </a>
-                  {/* <input type="button" value="Watch Video" /> */}
                 </div>
               </div>
             </div>

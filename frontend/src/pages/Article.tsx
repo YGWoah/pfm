@@ -46,6 +46,15 @@ interface ArticleType {
   titre: string;
   updatedAt: Date;
   userId: number;
+  categorie: {
+    id: number;
+    nom: string;
+  };
+  User: {
+    id: number;
+    nom: string;
+    email: string;
+  };
 }
 
 function Article({ article }: { article: ArticleType }) {
@@ -54,8 +63,8 @@ function Article({ article }: { article: ArticleType }) {
       <div className="m-5">
         <p className="ax-w-lg text-xl leading-normal text-gray-900">
           {' '}
-          <span className="font-semibold">Johe Piden</span> shared
-          this article {article.userId}
+          <span className="font-semibold">{article.User.nom} </span>
+          shared an article
         </p>
 
         <div className="w-full p-4 shadow-md  text-black">
@@ -66,7 +75,7 @@ function Article({ article }: { article: ArticleType }) {
                 href="#"
                 className="mb-0 capitalize  "
               >
-                Joe Biden
+                {article?.categorie?.nom}
               </a>
             </div>
             <a rel="noopener noreferrer" href="#">
@@ -91,7 +100,7 @@ function Article({ article }: { article: ArticleType }) {
             ) : (
               ''
             )}
-            <div className="space-y-2">
+            <div className=" mt-4 space-y-4">
               <a rel="noopener noreferrer" href="#" className="block">
                 <h3 className="text-xl font-semibold  ">
                   {article.titre}

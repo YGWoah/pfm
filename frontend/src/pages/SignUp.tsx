@@ -41,12 +41,12 @@ const SignUp = () => {
       return;
     }
     let payload = {
-      username: FullName.current.value,
+      name: FullName.current.value,
       email: Email.current.value,
       password: Password.current.value,
     };
     setClickable(false);
-    axios.post('/api/users/register', payload).then((res) => {
+    axios.post('/auth/register', payload).then((res) => {
       console.log(res.data);
       setClickable(true);
     });

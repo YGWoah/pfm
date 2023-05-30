@@ -41,7 +41,7 @@ model User {
   id          Int           @id @default(autoincrement())
   nom         String        @default("") @db.VarChar(40)
   email       String        @unique @default("") @db.VarChar(40)
-  password    String        @default("") @db.VarChar(40)
+  password    String        @default("") @db.VarChar(100)
   role        Role          @default(AUTHOR)
   Article     Article[]
   Commentaire Commentaire[]

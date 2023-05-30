@@ -6,6 +6,7 @@ import React, {
 } from 'react';
 import { Navigate } from 'react-router-dom';
 import axios from 'axios';
+import { ToastMessage } from '../Component/ToastMesssage';
 
 const Login = () => {
   const email: RefObject<HTMLInputElement> = useRef(null);
@@ -35,8 +36,8 @@ const Login = () => {
       <>
         <div className="flex justify-center w-full h-full">
           <div className=" w-4/5 flex flex-col justify-center py-12 sm:px-6 lg:px-8 sm:w-3/5">
-            <div className="sm:mx-auto sm:w-full sm:max-w-md">
-              <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
+            <div className="flex items-center justify-center ">
+              <h2 className=" text-2xl font-medium leading-7 m-5 black">
                 Log in to your account
               </h2>
             </div>
@@ -84,7 +85,7 @@ const Login = () => {
                     </div>
                   </div>
 
-                  <div className="flex items-center justify-between">
+                  {/* <div className="flex items-center justify-between">
                     <div className="flex items-center">
                       <input
                         id="remember-me"
@@ -104,22 +105,21 @@ const Login = () => {
                       <button className="font-medium text-blue-600 hover:text-blue-500">
                         Forgot your password?
                       </button>
-                    </div>
-                  </div>
+                    </div> 
+                  </div> */}
 
                   <div className="flex justify-center">
                     <button
                       type="submit"
                       onClick={handleLogin}
-                      style={{ backgroundColor: '#000000' }}
                       className={
-                        ' bg-black text-white  px-6 py-2 rounded-2xl p-4 inline-block text-base leading-normal focus:outline-none hover:bg-black hover:text-white  ' +
+                        ' flex signIn items-center justify-center bg-primary  text-white rounded-md text-base w-32    h-10' +
                         (clickable
                           ? ''
                           : 'cursor-not-allowed opacity-50')
                       }
                     >
-                      Sign in
+                      Log In
                     </button>
                   </div>
                 </div>
@@ -127,6 +127,7 @@ const Login = () => {
             </div>
           </div>
         </div>
+        {/* <ToastMessage /> */}
       </>
     );
   } else {
