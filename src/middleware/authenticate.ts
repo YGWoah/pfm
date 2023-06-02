@@ -44,7 +44,11 @@ export function authenticate(
           return next();
         }
       } catch (error) {
-        console.log(error);
+        if (error instanceof jwt.TokenExpiredError) {
+          res.status(401).json({ message: 'Token expired' });
+          console.log('Token expired');
+          return;
+        }
       }
     }
   }
