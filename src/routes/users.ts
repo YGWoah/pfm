@@ -1,7 +1,7 @@
 import express, { Request, Response, NextFunction } from 'express';
-import { PrismaClient, User } from '@prisma/client';
+import { User } from '@prisma/client';
 import { hashPassword } from '../utils/passwordUtils';
-const prisma = new PrismaClient();
+import prisma from '../../prisma/prisma';
 const router = express.Router();
 
 router.get('/', (req: Request, res: Response, next: NextFunction) => {

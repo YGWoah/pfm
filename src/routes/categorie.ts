@@ -1,7 +1,8 @@
 import express, { Request, Response, NextFunction } from 'express';
-import { PrismaClient, Categorie } from '@prisma/client';
+import { Categorie } from '@prisma/client';
 
-const prisma = new PrismaClient();
+// const prisma = new PrismaClient();
+import prisma from '../../prisma/prisma';
 const router = express.Router();
 
 router.get('/', (req: Request, res: Response, next: NextFunction) => {

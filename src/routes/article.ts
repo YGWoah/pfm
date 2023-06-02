@@ -1,8 +1,9 @@
 import express, { Request, Response, NextFunction } from 'express';
-import { PrismaClient, Article } from '@prisma/client';
+import { Article } from '@prisma/client';
 import { takeCoverage } from 'v8';
 
-const prisma = new PrismaClient();
+// const prisma = new PrismaClient();
+import prisma from '../../prisma/prisma';
 const router = express.Router();
 
 router.get('/', (req: Request, res: Response, next: NextFunction) => {
@@ -31,6 +32,7 @@ router.get('/', (req: Request, res: Response, next: NextFunction) => {
     });
 });
 
+//get a single article by id
 router.get('/:id', (req: Request, res: Response) => {
   let { id } = req.params;
   prisma.article

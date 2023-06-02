@@ -1,7 +1,7 @@
 import express, { Request, Response, NextFunction } from 'express';
-import { PrismaClient, Commentaire } from '@prisma/client';
+import { Commentaire } from '@prisma/client';
 
-const prisma = new PrismaClient();
+import prisma from '../../prisma/prisma';
 const router = express.Router();
 
 // create a comment
@@ -83,36 +83,46 @@ router.get(
 router.get(
   '/article/:articleID',
   async (req: Request, res: Response, next: NextFunction) => {
-    let { articleID } = req.params;
-    let existingArticle = await prisma.article.findUnique({
-      where: {
-        id: parseInt(articleID),
-      },
-    });
-    if (!existingArticle) {
-      res.status(404).json({ error: 'Article not found' });
-      return;
-    }
-    prisma.commentaire
-      .findMany({
+    try {
+      let { articleID } = req.params;
+      if (!articleID) {
+        res.status(403).json({ error: 'insuffisent data' });
+        return;
+      }
+      let existingArticle = await prisma.article.findUnique({
         where: {
-          Article: {
-            id: parseInt(articleID),
-          },
+          id: parseInt(articleID),
         },
-        include: {
-          User: {
-            select: {
-              id: true,
-              role: true,
-              nom: true,
+      });
+      if (!existingArticle) {
+        res.status(404).json({ error: 'Article not found' });
+        return;
+      }
+      prisma.commentaire
+        .findMany({
+          where: {
+            Article: {
+              id: parseInt(articleID),
             },
           },
-        },
-      })
-      .then((commentaire: Commentaire[] | null) => {
-        res.json(commentaire);
-      });
+          include: {
+            User: {
+              select: {
+                id: true,
+                role: true,
+                nom: true,
+              },
+            },
+          },
+        })
+        .then((commentaire: Commentaire[] | null) => {
+          res.json(commentaire);
+        });
+    } catch (error) {
+      console.log(error);
+
+      res.status(500).json({ message: 'something went wrong' });
+    }
   }
 );
 

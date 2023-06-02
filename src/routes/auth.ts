@@ -1,10 +1,10 @@
 import express, { Request, Response, NextFunction } from 'express';
-import { PrismaClient, Article } from '@prisma/client';
+import { Article } from '@prisma/client';
+import prisma from '../../prisma/prisma';
 const jwt = require('jsonwebtoken');
 import { generateAccessToken } from '../utils/generateAccesToken';
 import { authenticate } from '../middleware/authenticate';
 import { comparePasswords } from '../utils/passwordUtils';
-const prisma = new PrismaClient();
 const router = express.Router();
 import { User } from '@prisma/client';
 import { hashPassword } from '../utils/passwordUtils';
