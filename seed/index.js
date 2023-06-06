@@ -1,17 +1,32 @@
 const { PrismaClient, Role } = require('@prisma/client');
 const faker = require('faker');
-const { hashPassword } = require('../src/utils/passwordUtils');
+
+const bcrypt = require('bcrypt');
+
+const saltRounds = 10; // Number of salt rounds for bcrypt
+
+async function hashPassword(password) {
+  try {
+    const hashedPassword = await bcrypt.hash(password, saltRounds);
+    return hashedPassword;
+  } catch (error) {
+    // Handle error
+    console.log(error);
+    throw new Error('Password hashing failed');
+  }
+}
 
 const prisma = new PrismaClient();
-
 const createUsers = async () => {
   const users = await Promise.all(
     Array.from({ length: 10 }).map(async () => {
+      let password = await faker.internet.password();
+      password = await hashPassword(password);
       const user = await prisma.user.create({
         data: {
           nom: faker.name.findName(),
           email: faker.internet.email(),
-          password: await hashPassword(faker.internet.password()),
+          password: password,
           role: Role.AUTHOR,
         },
       });
@@ -145,8 +160,11 @@ const createCategories = async () => {
 // }
 
 // seed();
+
 try {
-  createUsers();
+  // createUsers();
+  // createAdmin();
+  createCategories();
 } catch (error) {
   console.log(error);
 }
