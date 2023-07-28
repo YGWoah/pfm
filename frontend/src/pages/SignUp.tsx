@@ -5,6 +5,7 @@ import React, {
   useState,
 } from 'react';
 import axios from 'axios';
+import CustomInput from '../Component/CustomInput';
 //import ToastMessage from '../Compenents/supCompenent/ToastMessage';
 
 const SignUp = () => {
@@ -14,11 +15,17 @@ const SignUp = () => {
   const Email: RefObject<HTMLInputElement> = useRef(null);
   const Password: RefObject<HTMLInputElement> = useRef(null);
   const Verify: RefObject<HTMLInputElement> = useRef(null);
+  const fullNamePattern = /^[A-Za-z\s]+$/;
+  const onChangeEmailPattern = /^[a-zA-Z0-9_-]+(@[a-zA-Z0-9_-]+)?$/;
+  const onBlurEmailPattern =
+    /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
+
   //i use useCallback to  cache the fumction althiugh it is not neccesery
   const SignUp = useCallback(() => {
     //check if the password is valid and only containes letters and numbers and special characters
 
-    var matchedCase = /^[a-zA-Z0-9!@$%^&*]{8,16}$/;
+    var matchedCase =
+      /^(?=.*\d)(?=.*[a-zA-Z])(?=.*[@#$%^&+=])(?!.*\s).{8,}$/;
 
     if (
       !FullName.current ||
@@ -55,8 +62,8 @@ const SignUp = () => {
     <>
       <div className="w-full h-full flex justify-center m-8 sm:m-4">
         <div className="w-full flex flex-col justify-center py-8 sm:px-6 sm:w-3/5 md:w-1/2 lg:px-8 lg:w-1/2">
-          <div className="sm:mx-auto sm:w-full sm:max-w-md">
-            <h2 className="mt-6 text-center text-3xl font-bold text-gray-900">
+          <div className="flex items-center justify-center">
+            <h2 className="text-2xl font-medium leading-7 m-5 black">
               Create new account
             </h2>
           </div>
@@ -72,13 +79,15 @@ const SignUp = () => {
                     Full Name
                   </label>
                   <div className="mt-1">
-                    <input
+                    <CustomInput
                       id="fullName"
                       name="fullName "
                       type="name"
-                      ref={FullName}
                       autoComplete="email"
+                      onChangePattern={fullNamePattern}
+                      onChangeErrorMessage="Please enter letters and spaces only"
                       required
+                      ref={FullName}
                       className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
                     />
                   </div>
@@ -91,12 +100,15 @@ const SignUp = () => {
                     Email address
                   </label>
                   <div className="mt-1">
-                    <input
+                    <CustomInput
                       id="email"
                       name="email"
                       type="email"
+                      onChangePattern={onChangeEmailPattern}
+                      onBlurPattern={onBlurEmailPattern}
+                      onChangeErrorMessage="Please use only letters, numbers, -, _, and @"
+                      onBlurErrorMessage="Please insert a valid Email"
                       ref={Email}
-                      autoComplete="email"
                       required
                       className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
                     />
@@ -110,13 +122,15 @@ const SignUp = () => {
                     Password
                   </label>
                   <div className="mt-1">
-                    <input
+                    <CustomInput
                       id="password"
                       name="password"
                       type="password"
+                      onBlurPattern={
+                        /^(?=.*\d)(?=.*[a-zA-Z])(?=.*[@#$%^&+=])(?!.*\s).{8,}$/
+                      }
                       ref={Password}
-                      autoComplete="current-password"
-                      required
+                      onBlurErrorMessage="Password must contain at least one digit, one letter, one special character, and be at least 8 characters long."
                       className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
                     />
                   </div>
@@ -144,11 +158,10 @@ const SignUp = () => {
                   <button
                     type="submit"
                     onClick={SignUp}
-                    style={{ backgroundColor: '#000000' }}
                     className={
-                      ' bg-black text-white  px-6 py-2 rounded-2xl p-4 inline-block text-base leading-normal focus:outline-none hover:bg-black hover:text-white  ' +
+                      ' flex signIn items-center justify-center bg-primary  text-white rounded-md text-base w-32    h-10 ' +
                       (clickable
-                        ? ''
+                        ? ' '
                         : 'cursor-not-allowed opacity-50')
                     }
                   >

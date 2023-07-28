@@ -1,5 +1,5 @@
-// import axios from 'axios';
 import { Link, useLoaderData } from 'react-router-dom';
+import useDataFetch from '../Hooks/useDataFetch';
 import '../style/Article.scss';
 
 const Reply = (props: {
@@ -70,17 +70,17 @@ function Article({ article }: { article: ArticleType }) {
         <div className="w-full p-4 shadow-md  text-black">
           <div className="flex justify-between pb-4 border-bottom">
             <div className="flex items-center">
-              <a
+              <Link
                 rel="noopener noreferrer"
-                href="#"
+                to="#"
                 className="mb-0 capitalize  "
               >
                 {article?.categorie?.nom}
-              </a>
+              </Link>
             </div>
-            <a rel="noopener noreferrer" href="#">
+            <Link rel="noopener noreferrer" to="#">
               See All
-            </a>
+            </Link>
           </div>
           <div className="w-full ">
             {article.image ? (
@@ -101,11 +101,15 @@ function Article({ article }: { article: ArticleType }) {
               ''
             )}
             <div className=" mt-4 space-y-4">
-              <a rel="noopener noreferrer" href="#" className="block">
+              <Link
+                rel="noopener noreferrer"
+                to="#"
+                className="block"
+              >
                 <h3 className="text-xl font-semibold  ">
                   {article.titre}
                 </h3>
-              </a>
+              </Link>
               <p className="mb-3 text-gray-500 dark:text-gray-400">
                 {article.contenu}
               </p>
@@ -117,11 +121,10 @@ function Article({ article }: { article: ArticleType }) {
   );
 }
 
-const PostRouter = (props: any) => {
+const ArticlesContainer = (props: any) => {
   const atricles: ArticleType[] | unknown =
     useLoaderData() as ArticleType[];
 
-  console.log('props', atricles);
   if (!Array.isArray(atricles)) {
     return <div>Something went Wrong</div>;
   } else
@@ -135,4 +138,4 @@ const PostRouter = (props: any) => {
     );
 };
 
-export default PostRouter;
+export default ArticlesContainer;

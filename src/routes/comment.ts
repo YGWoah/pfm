@@ -43,7 +43,7 @@ router.post('/', async (req, res) => {
       },
     })
     .then((commentaire: Commentaire) => {
-      res.json(commentaire);
+      res.status(200).json(commentaire);
     })
     .catch((error) => {
       console.log(error);

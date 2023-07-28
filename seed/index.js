@@ -90,9 +90,9 @@ const createArticles = async () => {
 };
 
 try {
-  // createUsers();
-  // createAdmin();
-  // createCategories();
+  createUsers();
+  createAdmin();
+  createCategories();
   createArticles();
 } catch (error) {
   console.log(error);

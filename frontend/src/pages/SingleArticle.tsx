@@ -26,7 +26,7 @@ interface ReplyType {
   };
 }
 
-function OneReply(props: { data: ReplyType } | undefined) {
+function SingleReply(props: { data: ReplyType } | undefined) {
   return (
     <article className="p-6 mb-6 text-base bg-white rounded-lg  ">
       <footer className="flex justify-between items-center mb-2">
@@ -77,7 +77,21 @@ function Reply(props: { articleId: number }) {
         articleId: props.articleId,
       };
       axiosInstance.post('/comment/', data).then((res) => {
+        contenu.current!.value = '';
         setClickable(true);
+        console.log(res.data);
+
+        let currentComment = {
+          contenu: res.data.contenu,
+          articleId: res.data.articleId,
+          email: res.data.email,
+          User: {
+            id: 1,
+            nom: 'You',
+            role: 'AUTHOR',
+          },
+        };
+        setComments([...comments, currentComment]);
       });
     } catch (error) {
       console.log(error);
@@ -107,7 +121,8 @@ function Reply(props: { articleId: number }) {
       <div className="   px-4">
         <div className="flex justify-between items-center mb-6">
           <h2 className="text-lg lg:text-2xl font-bold text-gray-900 ">
-            Discussion (20)
+            Discussion{' '}
+            {comments.length > 0 ? `(${comments.length})` : ''}
           </h2>
         </div>
         <div className="mb-6 w-full">
@@ -139,7 +154,7 @@ function Reply(props: { articleId: number }) {
         </div>
       </div>
       {comments.map((comment: any) => (
-        <OneReply data={comment} />
+        <SingleReply data={comment} />
       ))}
     </section>
   );

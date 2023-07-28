@@ -36,7 +36,7 @@ const Category = (category: {
   const [color, setColor] = useState(generateColor());
   return (
     <div
-      className="flex m-2 items-center justify-center cursor-pointer"
+      className=" flex m-2 items-center justify-center   cursor-pointer "
       onClick={() =>
         setChosenCategory?.setChosenCategory(category.category)
       }
@@ -45,12 +45,12 @@ const Category = (category: {
         style={{
           display: 'flex',
           backgroundColor: `${color}`,
-          width: '2rem',
-          height: '2rem',
         }}
-        className="rounded-2xl m-1"
+        className=" rounded-2xl m-1 w-8 h-8"
       ></span>
-      <p className="font-medium">{category.category.nom}</p>
+      <p className="font-medium inline float-left  ">
+        {category.category.nom}
+      </p>
     </div>
   );
 };
@@ -179,7 +179,7 @@ const AddArticle = () => {
             <CategoryContext.Provider
               value={{ chosenCategory, setChosenCategory }}
             >
-              <div className="flex items-center mb-4 col-span-full">
+              <div className="flex items-center mb-4 col-span-full overflow-x-scroll ">
                 {categories
                   ? categories.map((category) => (
                       <Category category={category} />

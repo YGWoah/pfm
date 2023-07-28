@@ -15,7 +15,7 @@ import AddArticle from './pages/AddArticle';
 import Profile from './pages/Profile';
 import Menu from './Component/Menu';
 import SingleArticle from './pages/SingleArticle';
-
+import ArticleEditor from './pages/ArticleEditor';
 // Lib or utils
 import getArticles from './lib/getArticles';
 import getArticle from './lib/getArticle';
@@ -27,22 +27,31 @@ const BrowserRouter = createBrowserRouter([
     errorElement: <ErrorPage />,
   },
   {
+    path: '/editor',
+    element: <ArticleEditor />,
+    // errorElement: <ErrorPage />,
+    loader: async () => {
+      return await getArticles();
+    },
+  },
+  {
     path: 'home',
     element: <Menu />,
-    errorElement: <ErrorPage />,
+    // errorElement: <ErrorPage />,
     children: [
       {
         path: '',
         element: <Article />,
-        errorElement: <ErrorPage />,
+        // errorElement: <ErrorPage />,
         loader: async () => {
           return await getArticles();
         },
       },
+
       {
         path: 'article',
         element: <Article />,
-        errorElement: <ErrorPage />,
+        // errorElement: <ErrorPage />,
         loader: async () => {
           console.log('test');
           return await getArticles();

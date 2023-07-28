@@ -6,7 +6,7 @@ import React, {
 } from 'react';
 import { Navigate } from 'react-router-dom';
 import axios from 'axios';
-import { ToastMessage } from '../Component/ToastMesssage';
+import ToastMessage from '../Component/ToastMesssage';
 
 const Login = () => {
   const email: RefObject<HTMLInputElement> = useRef(null);
@@ -23,13 +23,25 @@ const Login = () => {
     };
 
     setClickable(false);
-    axios.post('/auth/login', data).then((res) => {
-      if (res.data.token) {
-        localStorage.setItem('token', JSON.stringify(res.data.token));
-        setIsLoggedIn(true);
-      }
-      setClickable(true);
-    });
+    axios
+      .post('/auth/login', data)
+      .then((res) => {
+        if (res.data.token) {
+          localStorage.setItem(
+            'token',
+            JSON.stringify(res.data.token)
+          );
+          setIsLoggedIn(true);
+        }
+        setClickable(true);
+      })
+      .catch((err) => {
+        console.log(err);
+        setClickable(true);
+        if (!password.current || !email.current) return;
+        email.current.value = '';
+        password.current.value = '';
+      });
   }, []);
   if (!isLoggedIn) {
     return (
@@ -85,37 +97,14 @@ const Login = () => {
                     </div>
                   </div>
 
-                  {/* <div className="flex items-center justify-between">
-                    <div className="flex items-center">
-                      <input
-                        id="remember-me"
-                        name="remember-me"
-                        type="checkbox"
-                        className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
-                      />
-                      <label
-                        htmlFor="remember-me"
-                        className="ml-2 block text-sm text-gray-900"
-                      >
-                        Remember me
-                      </label>
-                    </div>
-
-                    <div className="text-sm">
-                      <button className="font-medium text-blue-600 hover:text-blue-500">
-                        Forgot your password?
-                      </button>
-                    </div> 
-                  </div> */}
-
                   <div className="flex justify-center">
                     <button
                       type="submit"
                       onClick={handleLogin}
                       className={
-                        ' flex signIn items-center justify-center bg-primary  text-white rounded-md text-base w-32    h-10' +
+                        ' flex signIn items-center justify-center bg-primary  text-white rounded-md text-base w-32    h-10 ' +
                         (clickable
-                          ? ''
+                          ? ' '
                           : 'cursor-not-allowed opacity-50')
                       }
                     >
@@ -127,7 +116,7 @@ const Login = () => {
             </div>
           </div>
         </div>
-        {/* <ToastMessage /> */}
+        <ToastMessage message="You need to log in " />
       </>
     );
   } else {
