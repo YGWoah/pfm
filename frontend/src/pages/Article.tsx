@@ -1,6 +1,5 @@
 import { Link, useLoaderData } from 'react-router-dom';
-import useDataFetch from '../Hooks/useDataFetch';
-import '../style/Article.scss';
+import '../style/Article.css';
 
 const Reply = (props: {
   userName: string;

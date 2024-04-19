@@ -1,4 +1,4 @@
-import React, {
+import{ 
   useCallback,
   useRef,
   useState,
@@ -6,7 +6,7 @@ import React, {
 } from 'react';
 import { Navigate } from 'react-router-dom';
 import axios from 'axios';
-import ToastMessage from '../Component/ToastMesssage';
+import { Toaster, toast } from 'sonner';
 
 const Login = () => {
   const email: RefObject<HTMLInputElement> = useRef(null);
@@ -36,6 +36,9 @@ const Login = () => {
         setClickable(true);
       })
       .catch((err) => {
+        if(err.response.status === 404){
+          toast.error('Wrong Email or password');
+        }
         console.log(err);
         setClickable(true);
         if (!password.current || !email.current) return;
@@ -46,6 +49,7 @@ const Login = () => {
   if (!isLoggedIn) {
     return (
       <>
+      <Toaster />
         <div className="flex justify-center w-full h-full">
           <div className=" w-4/5 flex flex-col justify-center py-12 sm:px-6 lg:px-8 sm:w-3/5">
             <div className="flex items-center justify-center ">
@@ -116,7 +120,6 @@ const Login = () => {
             </div>
           </div>
         </div>
-        <ToastMessage message="You need to log in " />
       </>
     );
   } else {

@@ -1,4 +1,3 @@
-import React, { Fragment } from 'react';
 import { NavLink, Outlet } from 'react-router-dom';
 const Nav = () => {
   return (

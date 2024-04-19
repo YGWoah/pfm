@@ -1,4 +1,4 @@
-import React, { useRef, useState, forwardRef, Ref } from 'react';
+import React, {  useState, forwardRef, Ref } from 'react';
 
 interface CustomInputProps
   extends React.InputHTMLAttributes<HTMLInputElement> {

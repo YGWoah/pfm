@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import { Link, NavLink } from 'react-router-dom';
-import '../style/Hero.scss';
+import '../style/Hero.css';
 
 function Hero() {
   const DispLogIn = () => {
