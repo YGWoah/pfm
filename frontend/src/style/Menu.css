@@ -1,0 +1,58 @@
+/* Import Tailwind CSS */
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+/* Nav */
+.nav {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: center;
+	margin-right: 0;
+	margin-left: 4px;
+	padding-left: 4px;
+	padding-top: 8px;
+	padding-right: 4px;
+	padding-bottom: 8px;
+	background-color: white;
+	height: 100%;
+	flex-basis: 25%;
+}
+
+/* Logout */
+.logout h3 {
+	color: red;
+}
+
+/* Category */
+.category {
+	margin-bottom: 1rem;
+}
+
+/* CategoriesList */
+.categoriesList {
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+	margin-left: 2rem;
+	height: 10rem;
+	overflow-y: scroll;
+}
+
+.categoriesList li {
+	display: flex;
+	gap: 10%;
+	width: 50%;
+	justify-content: space-between;
+	align-items: center;
+	margin: 0.5rem 0;
+	cursor: pointer;
+}
+
+.categoriesList li span {
+	width: 2rem;
+	height: 2rem;
+	border-radius: 1rem;
+}
+            

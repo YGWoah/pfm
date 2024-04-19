@@ -25,7 +25,7 @@ router.post('/login', async (req: Request, res: Response) => {
     })
     .then(async (user) => {
       if (!user) {
-        res.json({ error: 'user not found' });
+        res.status(404).json({ error: 'user not found' });
         return;
       }
       let passwordsMatch = await comparePasswords(
@@ -49,7 +49,7 @@ router.post('/login', async (req: Request, res: Response) => {
     .catch((error) => {
       console.log(error);
 
-      res.json({ error: 'user not found' });
+      res.status(404).json({ error: 'user not found' });
     });
 });
 
