@@ -37,17 +37,17 @@ class App {
 	}
 
 	private routerSetup() {
-		this.app.use('/auth', authRouter);
 		// this.app.use('/', indexRouter);
 		this.app.get('/', (req, res) => {
 			console.log(__dirname);
 			res.sendFile(path.join(__dirname, '../frontend', 'build', 'index.html'));
 		});
 		// this.app.use(authenticate);
-		this.app.use('/users', authenticate, usersRouter);
-		this.app.use('/categorie', authenticate, categorieRouter);
-		this.app.use('/article', authenticate, articleRouter);
-		this.app.use('/comment', authenticate, commentRouter);
+		this.app.use('/api/auth', authRouter);
+		this.app.use('/api/users', authenticate, usersRouter);
+		this.app.use('/api/categorie', authenticate, categorieRouter);
+		this.app.use('/api/article', authenticate, articleRouter);
+		this.app.use('/api/comment', authenticate, commentRouter);
 	}
 
 	private checkDatabaseConnection() {
