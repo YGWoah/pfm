@@ -1,5 +1,4 @@
-import React, { Fragment, useRef, useState } from 'react';
-import { TypeElement } from 'typescript';
+import React, { useRef, useState } from 'react';
 
 interface ToastMessage {
   text: string;
@@ -14,47 +13,10 @@ interface MyComponentProps {
 const ToastMessage: React.FC<MyComponentProps> = ({
   message: String,
 }) => {
-  const succes = useRef(
-    <svg
-      aria-hidden="true"
-      className="w-5 h-5"
-      fill="currentColor"
-      viewBox="0 0 20 20"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        fill-rule="evenodd"
-        d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-        clip-rule="evenodd"
-      ></path>
-    </svg>
-  );
-  const [toastMessage, setToastMessage] =
-    useState<ToastMessage | null>(null);
-
-  const showToast = (message: ToastMessage) => {
-    setToastMessage(message);
-
-    setTimeout(() => {
-      setToastMessage(null);
-    }, 3000);
-  };
+ 
+  
 
   return (
-    // <div className="toast-container">
-    //   {toastMessage && (
-    //     <div className={`toast ${toastMessage.type}`}>
-    //       <div className="toast-icon">{toastMessage.icon}</div>
-    //       <div className="toast-message">{toastMessage.text}</div>
-    //       <button
-    //         className="toast-close"
-    //         onClick={() => setToastMessage(null)}
-    //       >
-    //         &times;
-    //       </button>
-    //     </div>
-    //   )}
-    // </div>
     <div className="absolute bottom-6 right-6">
       {/* toast-cuuces */}
       <div
@@ -103,7 +65,6 @@ const ToastMessage: React.FC<MyComponentProps> = ({
           </svg>
         </button>
       </div>
-      {/* toast-danger */}
       <div
         id="toast-danger"
         className="flex items-center w-full max-w-xs p-4 mb-4 text-gray-500 bg-white rounded-lg shadow dark:text-gray-400 dark:bg-gray-800"

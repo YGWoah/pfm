@@ -1,8 +1,7 @@
-import React from 'react';
-import { useRouteError } from 'react-router-dom';
+// import { useRouteError } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 function ErrorPage() {
-  const error: Error | unknown = useRouteError();
+  // const error: Error | unknown = useRouteError();
 
   return (
     <section className="flex items-center h-full p-16 ">

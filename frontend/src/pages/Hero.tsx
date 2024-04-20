@@ -1,14 +1,14 @@
-import React, { Fragment } from 'react';
+import { Fragment } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import '../style/Hero.css';
 
 function Hero() {
-  const DispLogIn = () => {
-    return;
-  };
-  const DispSignIn = () => {
-    return;
-  };
+  // const DispLogIn = () => {
+  //   return;
+  // };
+  // const DispSignIn = () => {
+  //   return;
+  // };
   return (
     <Fragment>
       <div className="header">
