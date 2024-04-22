@@ -2,7 +2,6 @@ import express, {
 	Request,
 	Response,
 	NextFunction,
-	ErrorRequestHandler,
 } from 'express';
 import path from 'path';
 import cookieParser from 'cookie-parser';
