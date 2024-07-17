@@ -86,7 +86,7 @@ router.post('/register', async (req: Request, res: Response) => {
     })
     .catch((error: any) => {
       console.log(error);
-      res.json(error);
+      res.status(400).json(error);
     });
 });
 

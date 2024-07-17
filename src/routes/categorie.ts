@@ -1,7 +1,6 @@
 import express, { Request, Response, NextFunction } from 'express';
 import { Categorie } from '@prisma/client';
 
-// const prisma = new PrismaClient();
 import prisma from '../../prisma/prisma';
 const router = express.Router();
 
@@ -9,7 +8,7 @@ router.get('/', (req: Request, res: Response, next: NextFunction) => {
   prisma.categorie
     .findMany()
     .then((categorie: Categorie[] | null) => {
-      res.json(categorie);
+      res.status(200).json(categorie);
     });
 });
 
@@ -30,7 +29,6 @@ router.get('/:id', (req: Request, res: Response) => {
     });
 });
 
-//create a new category
 router.post('/', async (req, res) => {
   let { name } = req.body;
 
