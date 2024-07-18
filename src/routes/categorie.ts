@@ -10,6 +10,7 @@ router.get('/:id', CategoryController.getCategoryById);
 
 router.post('/', CategoryController.createCategory);
 
+
 router.patch('/:id', CategoryController.updateCategoryName);
 
 router.delete('/:id', CategoryController.deleteCategory);
