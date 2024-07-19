@@ -40,6 +40,7 @@ model Commentaire {
 model User {
   id          Int           @id @default(autoincrement())
   nom         String        @default("") @db.VarChar(40)
+  description String        @default("") @db.VarChar(500)
   email       String        @unique @default("") @db.VarChar(40)
   password    String        @default("") @db.VarChar(100)
   role        Role          @default(AUTHOR)

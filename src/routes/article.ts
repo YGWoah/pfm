@@ -13,6 +13,6 @@ router.post('/', ArticleController.createArticle);
 
 router.patch('/:id', ArticleController.updateArticle);
 
-router.delete('/:id', ArticleController.deleteArticle);
+router.delete('/:id', ArticleController.deleteArticleByUserIdAndid);
 
 export default router;
