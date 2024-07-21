@@ -112,12 +112,12 @@ const deleteArticleByUserIdAndid = (req: Request, res: Response) => {
     return;
   }
   ArticleModel.deleteArticleByUserIdAndid(parseInt(id), userId)
-    .then((article: Article) => {
-      res.json(article);
+    .then(() => {
+      res.status(204).end();
     })
     .catch((error) => {
       console.log(error);
-      res.json({ error });
+      res.status(400).json({ error });
     });
 };
 

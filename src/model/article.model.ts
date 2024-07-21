@@ -104,7 +104,7 @@ const deleteArticleByUserIdAndid = async (
   id: number,
   userId: number
 ) => {
-  return prisma.article.delete({
+  return prisma.article.deleteMany({
     where: {
       id: id,
       userId: userId,
