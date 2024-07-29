@@ -42,7 +42,9 @@ const login = async (req: Request, res: Response) => {
 };
 
 const register = async (req: Request, res: Response) => {
-  let { name, email, password } = req.body;
+  let { name, email, password, description } = req.body;
+
+  console.log(description);
 
   const emailRegex =
     /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
@@ -59,9 +61,8 @@ const register = async (req: Request, res: Response) => {
     return;
   }
   let hashedPassword = await hashPassword(password);
-  console.log(hashedPassword.length);
 
-  UserModel.createUser(name, email, hashedPassword)
+  UserModel.createUser(name, email, hashedPassword, description)
     .then((user: User | null) => {
       res.json(user);
     })

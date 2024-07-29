@@ -5,7 +5,6 @@ generator client {
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
-  // shadowDatabaseUrl = env("SHADOW_DATABASE_URL")
 }
 
 model Article {
@@ -26,7 +25,12 @@ model Article {
 model Categorie {
   id      Int       @id @default(autoincrement())
   nom     String    @unique @default("") @db.VarChar(40)
+  color   String    @default("#000000") @db.VarChar(40)
   Article Article[]
+  userId  Int       @default(1)
+  User    User      @relation(fields: [userId], references: [id])
+
+  @@unique([nom, userId])
 }
 
 model Commentaire {
@@ -41,12 +45,13 @@ model Commentaire {
 model User {
   id          Int           @id @default(autoincrement())
   nom         String        @default("") @db.VarChar(40)
-  // description String        @default("") @db.VarChar(500)
+  description String        @default("") @db.VarChar(500)
   email       String        @unique @default("") @db.VarChar(40)
   password    String        @default("") @db.VarChar(100)
   role        Role          @default(AUTHOR)
   Article     Article[]
   Commentaire Commentaire[]
+  Categorie   Categorie[]
 }
 
 enum Role {

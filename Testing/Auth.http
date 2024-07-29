@@ -1,7 +1,18 @@
-POST http://localhost:8080/auth/login
+# POST https://pfm-sandy.vercel.app/api/auth/login
+# Content-Type: application/json
+
+# {
+#   "email": "cr8@gmail.com",
+#   "password": "&UM>fJR%:K3H^$S"
+#   }
+
+# POST https://pfm-sandy.vercel.app/api/auth/register
+POST http://localhost:8080/api/auth/register
 Content-Type: application/json
 
 {
-  "email": "example2@exemple.com",
-  "password": "123456sdkmdsm"
+  "name": "cr djfkds",
+  "email": "cr319@gmail.com",
+  "password": "&UM>fJR%:K3H^$S",
+  "description": "I am a developer"
   }
