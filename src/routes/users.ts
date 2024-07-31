@@ -16,6 +16,8 @@ router.patch('/password', UserController.updateUserPassword);
 
 router.patch('/name', UserController.updateUserName);
 
+router.patch('/description', UserController.updateUserDescription);
+
 router.delete('/', UserController.deleteUser);
 
 export default router;

@@ -67,6 +67,10 @@ const updateUserPassword = (id: number, password: string) => {
   return updateUserAttribute(id, 'password', password);
 };
 
+const updateUserDescription = (id: number, description: string) => {
+  return updateUserAttribute(id, 'description', description);
+};
+
 const deleteUser = (id: number) => {
   return prisma.user.delete({
     where: {
@@ -82,5 +86,6 @@ export default {
   updateUserName,
   updateUserEmail,
   updateUserPassword,
+  updateUserDescription,
   deleteUser,
 };

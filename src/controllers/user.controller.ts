@@ -66,103 +66,150 @@ const createUser = async (req: Request, res: Response) => {
 };
 
 const updateUserName = async (req: Request, res: Response) => {
-  console.log(req.headers);
-  let { name } = req.body;
-  let id = req.user?.id;
+  try {
+    const { name } = req.body;
+    const id = req.user?.id;
 
-  UserModel.updateUserName(parseInt(id), name)
-    .then((user: User | null) => {
-      if (!user) {
-        res.status(404).json({ error: 'user not found' });
-        return;
-      }
+    if (!id || !name) {
+      return res.status(400).json({ error: 'ID or name is missing' });
+    }
 
-      res.json({
-        message: 'name updated',
-        user: {
-          id: user.id,
-          name: user.nom,
-          email: user.email,
-        },
-      });
-    })
-    .catch((error: any) => {
-      res.json(error);
+    if (name.length < 2 || name.length > 50) {
+      return res
+        .status(400)
+        .json({ error: 'Name must be between 2 and 50 characters' });
+    }
+
+    const user = await UserModel.updateUserName(parseInt(id), name);
+
+    if (!user) {
+      return res.status(404).json({ error: 'User not found' });
+    }
+
+    res.json({
+      message: 'Name updated',
+      user: {
+        id: user.id,
+        name: user.nom,
+        email: user.email,
+      },
     });
+  } catch (error) {
+    console.error('Error updating user name:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
 };
 
 const updateUserPassword = async (req: Request, res: Response) => {
-  let { password } = req.body;
-  let id = req.user?.id;
+  try {
+    const { password } = req.body;
+    const id = req.user?.id;
 
-  let hashedPassword = await hashPassword(password);
+    if (!id || !password) {
+      return res
+        .status(400)
+        .json({ error: 'ID or password is missing' });
+    }
 
-  UserModel.updateUserPassword(parseInt(id), hashedPassword).then(
-    (user: User | null) => {
-      if (!user) {
-        res.status(404).json({ error: 'user not found' });
-        return;
-      }
-
-      res.json({
-        message: 'password updated',
-        user: {
-          id: user.id,
-          name: user.nom,
-          email: user.email,
-        },
+    if (password.length < 8) {
+      return res.status(400).json({
+        error: 'Password must be at least 8 characters long',
       });
     }
-  );
+
+    const hashedPassword = await hashPassword(password);
+    const user = await UserModel.updateUserPassword(
+      parseInt(id),
+      hashedPassword
+    );
+
+    if (!user) {
+      return res.status(404).json({ error: 'User not found' });
+    }
+
+    res.json({
+      message: 'Password updated',
+      user: {
+        id: user.id,
+        name: user.nom,
+        email: user.email,
+      },
+    });
+  } catch (error) {
+    console.error('Error updating user password:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
 };
 
 const updateUserMail = async (req: Request, res: Response) => {
-  let { email } = req.body;
+  try {
+    const { email } = req.body;
+    const id = req.user?.id;
+
+    if (!id || !email) {
+      return res
+        .status(400)
+        .json({ error: 'ID or email is missing' });
+    }
+
+    if (email.length < 4 || email.length > 30) {
+      return res
+        .status(400)
+        .json({ error: 'Email must be between 4 and 30 characters' });
+    }
+
+    const emailRegex =
+      /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    if (!emailRegex.test(email)) {
+      return res.status(400).json({ error: 'Email is not valid' });
+    }
+
+    const existingUser = await prisma.user.findUnique({
+      where: { email: email },
+    });
+
+    if (existingUser) {
+      return res.status(400).json({ error: 'Email already exists' });
+    }
+
+    const user = await UserModel.updateUserEmail(parseInt(id), email);
+
+    if (!user) {
+      return res.status(404).json({ error: 'User not found' });
+    }
+
+    res.json({
+      message: 'Email updated',
+      user: {
+        id: user.id,
+        name: user.nom,
+        email: user.email,
+      },
+    });
+  } catch (error) {
+    console.error('Error updating user email:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+};
+
+const updateUserDescription = async (req: Request, res: Response) => {
+  let { description } = req.body;
   let id = req.user?.id;
 
-  if (!id || !email) {
-    res.status(400).json({ error: 'id or email is missing' });
-    return;
-  }
-  if (email.length < 4 || email.length > 30) {
-    res.json({ error: 'email is too short or too long' });
+  if (!id) {
+    res.status(401).json({ error: 'Unauthorized' });
     return;
   }
 
-  let existingUser = await prisma.user.findUnique({
-    where: {
-      email: email,
-    },
-  });
-  if (existingUser) {
-    res.json({ error: 'email already exists' });
-    return;
-  }
-
-  const emailRegex =
-    /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-  if (!emailRegex.test(email)) {
-    res.json({ error: 'email is not valid' });
-    return;
-  }
-  UserModel.updateUserEmail(parseInt(id), email)
+  UserModel.updateUserDescription(parseInt(id), description)
     .then((user: User | null) => {
-      if (!user) {
-        res.status(404).json({ error: 'user not found' });
-        return;
-      }
-      res.json({
-        message: 'email updated',
-        user: {
-          id: user.id,
-          name: user.nom,
-          email: user.email,
-        },
-      });
+      res.json(user);
     })
     .catch((error: any) => {
       res.json(error);
     });
+
+  return null;
 };
 
 const deleteUser = async (req: Request, res: Response) => {
@@ -210,6 +257,7 @@ export default {
   updateUserName,
   updateUserPassword,
   updateUserMail,
+  updateUserDescription,
   deleteUser,
   getUserArticles,
 };
