@@ -213,7 +213,8 @@ const updateUserDescription = async (req: Request, res: Response) => {
 };
 
 const deleteUser = async (req: Request, res: Response) => {
-  let { password } = req.body;
+  let { oldPassword, newPassword } = req.body;
+
   let id = req.user?.id;
 
   let dbPassword = UserModel.getUserById(parseInt(id))
@@ -231,7 +232,7 @@ const deleteUser = async (req: Request, res: Response) => {
     return;
   }
 
-  if (dbPassword !== password) {
+  if (dbPassword !== oldPassword) {
     res.status(401).json({ error: 'password is not correct' });
     return;
   }

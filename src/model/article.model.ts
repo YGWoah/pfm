@@ -1,5 +1,4 @@
-import prisma from '../../prisma/prisma';
-
+import prisma from '../utils/prismaInstance';
 const createArticle = async (
   title: string,
   content: string,

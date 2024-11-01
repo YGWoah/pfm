@@ -1,10 +1,8 @@
 import express, {
-
   Request,
   Response,
   NextFunction,
   ErrorRequestHandler,
-
 } from 'express';
 import path from 'path';
 import cookieParser from 'cookie-parser';
@@ -19,6 +17,9 @@ import categorieRouter from './routes/categorie';
 import articleRouter from './routes/article';
 import commentRouter from './routes/comment';
 import { authenticate } from './middleware/authenticate';
+import healthRouter from './routes/health';
+
+const prisma = new PrismaClient();
 
 class App {
   public app: express.Application;
@@ -56,10 +57,10 @@ class App {
     this.app.use('/api/categorie', authenticate, categorieRouter);
     this.app.use('/api/article', authenticate, articleRouter);
     this.app.use('/api/comment', authenticate, commentRouter);
+    this.app.use('/health', healthRouter);
   }
 
   private checkDatabaseConnection() {
-    const prisma = new PrismaClient();
     prisma
       .$connect()
       .then(() => {

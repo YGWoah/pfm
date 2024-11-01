@@ -1,4 +1,4 @@
-import prisma from '../../prisma/prisma';
+import prisma from '../utils/prismaInstance';
 import { User } from '@prisma/client';
 
 const getUserById = (id: number) => {

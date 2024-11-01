@@ -3,13 +3,17 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "export NODE_OPTIONS='--trace-deprecation --abort-on-uncaught-exception' && export NODE_ENV=development && nodemon --exec ts-node ./bin/www.ts",
+    "start": "node dist/index.js",
+    "start:local":"export NODE_OPTIONS='--trace-deprecation --abort-on-uncaught-exception' && export NODE_ENV=development && nodemon --exec ts-node ./bin/www.ts",
     "build": "sh etc/build.sh",
-    "vercel-build": "npx prisma generate && sh etc/build.sh"
+    "vercel-build": "npx prisma generate && sh etc/build.sh",
+    "prisma:generate": "prisma generate",
+    "docker-start": "npm run build && npm start"
   },
   "dependencies": {
     "@prisma/client": "^4.14.0",
     "@types/cors": "^2.8.17",
+    "bad-words": "^4.0.0",
     "bcrypt": "^5.1.0",
     "cookie-parser": "~1.4.4",
     "cors": "^2.8.5",

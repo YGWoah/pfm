@@ -1,4 +1,4 @@
-import prisma from '../../prisma/prisma';
+import prisma from '../utils/prismaInstance';
 
 const getCategoryById = (id: number) => {
   return prisma.categorie.findUnique({

@@ -64,11 +64,22 @@ const register = async (req: Request, res: Response) => {
 
   UserModel.createUser(name, email, hashedPassword, description)
     .then((user: User | null) => {
-      res.json(user);
+      if (user) {
+        let token = generateAccessToken({
+          id: user.id,
+          email: user.email,
+        });
+        res.status(200).json({
+          user,
+          token,
+        });
+      } else {
+        res.status(400).json({ error: 'User creation failed' });
+      }
     })
     .catch((error: any) => {
       console.log(error);
-      res.json(error);
+      res.status(400).json(error);
     });
 };
 

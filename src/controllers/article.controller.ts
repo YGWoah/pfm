@@ -1,6 +1,7 @@
 import { Request, Response, NextFunction } from 'express';
 import { Article } from '@prisma/client';
 import ArticleModel from '../model/article.model';
+import cleanText from '../utils/cleanText';
 
 const getArticles = (
   req: Request,
@@ -59,10 +60,13 @@ const createArticle = async (req: Request, res: Response) => {
       message: 'Content Too Large',
     });
   }
+  // let cleanText = (text: string) => text;
+  let cleanedContenu = cleanText(contenu);
+  let cleanedTitre = cleanText(contenu);
 
   ArticleModel.createArticle(
-    titre,
-    contenu,
+    cleanedTitre,
+    cleanedContenu,
     categorie,
     userId,
     image,
